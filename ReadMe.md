@@ -143,7 +143,9 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 
 The Core library provides additional components to your service; if necessary. 
 
-See Microservice.Core. E.g.
+See Microservice.Core: see https://github.com/egerpaulj/Microservice.Core
+
+E.g.
 
 ```
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
