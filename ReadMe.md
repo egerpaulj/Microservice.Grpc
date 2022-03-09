@@ -161,7 +161,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 
 Use **SetupMetrics()** to expose the Metrics to prometheus
 
-    ![Screenshot: Grafana displaying Grpc Metrics](/Documentation/GrpcMontoring.png)
+![Screenshot: Grafana displaying Grpc Metrics](/Documentation/GrpcMontoring.png)
 
 
 ### TryOptionAsync<T>
