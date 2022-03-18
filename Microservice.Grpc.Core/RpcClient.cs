@@ -63,7 +63,7 @@ namespace Microservice.Grpc.Core
                     var reply = await client.ExecuteAsync(new RpcRequest
                     {
                         Correlationid = correlationId.ToString(),
-                        Request = JsonConvert.SerializeObject(request),
+                        Request = _jsonConverterProvider.Serialize(request),
                     });
 
                     if (!string.IsNullOrEmpty(reply.Errors))
@@ -73,7 +73,7 @@ namespace Microservice.Grpc.Core
 
                     _metrics.IncReplyReceived(_name);
                     _logger.LogInformation($"Received response from Grpc server. ServerName: {serverAddress}, CorrelationId: {correlationId}, Req-Res: {_name}");
-                    return JsonConvert.DeserializeObject<R>(reply.Reponse, _jsonConverterProvider.GetJsonConverters());
+                    return _jsonConverterProvider.Deserialize<R>(reply.Reponse);
                 }
                 catch (Exception e)
                 {

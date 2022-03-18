@@ -52,13 +52,13 @@ namespace Microservice.Grpc.Core
             reply.Correlationid = request.Correlationid;
             try
             {
-                var genericRequest = JsonConvert.DeserializeObject<T>(request.Request, _jsonConverterProvider.GetJsonConverters());
+                var genericRequest = _jsonConverterProvider.Deserialize<T>(request.Request);
 
                 var result = await Execute(genericRequest).Match(x => x, () => throw new Exception("Grpc Service Error - Nothing returned"), ex => throw ex);
 
                 if (result is not Unit)
                 {
-                    reply.Reponse = JsonConvert.SerializeObject(result);
+                    reply.Reponse = _jsonConverterProvider.Serialize(result);
                 }
 
                 _logger.LogInformation($"Successfully processed Grpc request on {_name}, CorrelationId: {request.Correlationid}");
